@@ -1,27 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>zjcSINKO_777</title>
   <style>
     body {
-      background-color: black;
+      background-color: #141414;
       color: white;
+      font-family: 'Arial', sans-serif;
       text-align: center;
-      font-family: Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
     }
+
     h1 {
-      font-size: 60px;
-      margin-top: 20%;
+      font-size: 80px;
+      color: #ff99cc;
+      letter-spacing: 5px;
+      text-shadow: 0 0 20px #ff99cc, 0 0 40px #ff66b2;
+      animation: glow 2s infinite alternate;
     }
-    p {
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    .floating {
       font-size: 20px;
-      margin-top: 10px;
+      color: #ffccff;
+      position: absolute;
+      animation: float 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .floating:nth-child(odd) {
+      animation-duration: 4s;
     }
   </style>
 </head>
+
 <body>
-  <h1>zjcSINKO_777</h1>
-  <p>My first GitHub Pages website</p>
+  <h1>周jc傻逼</h1>
+
+  <script>
+    const words = ["zjcSINKO", "zjcSINKO", "zjcSINKO"];
+    for (let i = 0; i < 20; i++) {
+      const span = document.createElement('span');
+      span.className = 'floating';
+      span.innerText = words[Math.floor(Math.random() * words.length)];
+      span.style.left = Math.random() * 100 + 'vw';
+      span.style.top = Math.random() * 100 + 'vh';
+      span.style.animationDuration = Math.random() * 5 + 3 + 's';
+      document.body.appendChild(span);
+    }
+  </script>
 </body>
+
 </html>
