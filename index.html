@@ -1,88 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>zjcSINKO_777</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
     body {
       margin: 0;
+      padding: 0;
+      background-color: #0d001a;
       overflow: hidden;
-      background-color: #000;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Orbitron', sans-serif;
     }
 
-    h1 {
-      color: #fff;
-      font-size: 5rem;
+    .text {
+      color: #ff00ff;
+      font-size: 80px;
       text-align: center;
-      margin-top: 20vh;
-      text-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #0ff;
-    }
-
-    .neon {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 8rem;
-      font-weight: bold;
-      color: #fff;
-      text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #f0f, 0 0 60px #f0f;
-      animation: flicker 1.5s infinite alternate;
+      text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff, 0 0 60px #ff00ff;
+      animation: glitch 1.5s infinite alternate;
     }
 
-    @keyframes flicker {
-      0% { opacity: 1; }
-      50% { opacity: 0.8; }
-      100% { opacity: 1; }
-    }
-
-    canvas {
+    .floating {
       position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
+      color: #ff00ff;
+      font-size: 25px;
+      animation: float 8s infinite linear;
     }
-  </style>
-</head>
-<body>
-  <h1>zjcSINKO_777</h1>
-  <div class="neon">SINKO</div>
 
-  <canvas id="matrix"></canvas>
+    @keyframes glitch {
+      0% {
+        text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+      }
 
-  <script>
-    const canvas = document.getElementById('matrix');
-    const ctx = canvas.getContext('2d');
+      50% {
+        text-shadow: 5px -5px 40px #ff00ff, -5px 5px 40px #00ffff;
+      }
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const letters = '01zjcSINKO777'.split('');
-    const fontSize = 16;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(1);
-
-    function draw() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = '#0ff';
-      ctx.font = fontSize + 'px monospace';
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = letters[Math.floor(Math.random() * letters.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
+      100% {
+        text-shadow: -5px 5px 40px #ff00ff, 5px -5px 40px #00ffff;
       }
     }
 
-    setInterval(draw, 50);
-  </script>
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .floating:nth-child(1) {
+      top: 10%;
+      left: 15%;
+    }
+
+    .floating:nth-child(2) {
+      top: 40%;
+      left: 80%;
+    }
+
+    .floating:nth-child(3) {
+      top: 70%;
+      left: 20%;
+    }
+
+    .floating:nth-child(4) {
+      top: 80%;
+      left: 60%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="text">周jc傻逼</div>
+
+  <div class="floating">zjcSINKO</div>
+  <div class="floating">777</div>
+  <div class="floating">未来赛博</div>
+  <div class="floating">降维打击</div>
 </body>
+
 </html>
