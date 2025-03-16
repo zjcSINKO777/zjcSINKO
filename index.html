@@ -1,97 +1,90 @@
-<!DOCTYPE >
-< lang="en">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>zjcSINKO_777</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
-
     body {
       margin: 0;
-      padding: 0;
-      background-color: #0d001a;
       overflow: hidden;
-      font-family: 'Orbitron', sans-serif;
+      background-color: black;
+      font-family: 'Poppins', sans-serif;
     }
 
-    .text {
+    h1 {
+      font-size: 8vw;
       color: #ff00ff;
-      font-size: 80px;
       text-align: center;
+      text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff, 0 0 60px #ff00ff;
-      animation: glitch 1.5s infinite alternate;
+      top: 30%;
+      width: 100%;
+      z-index: 10;
     }
 
-    . {
+    #floating {
+      font-size: 3vw;
+      color: #00ffff;
+      text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
       position: absolute;
-      color: #ff00ff;
-      font-size: 25px;
-      animation: float 8s infinite linear;
+      top: 60%;
+      width: 100%;
+      text-align: center;
+      animation: float 4s ease-in-out infinite;
     }
 
-    @ glitch {
-      0% {
-        text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
-      }
-
-      50% {
-        text-shadow: 5px -5px 40px #ff00ff, -5px 5px 40px #00ffff;
-      }
-
-      100% {
-        text-shadow: -5px 5px 40px #ff00ff, 5px -5px 40px #00ffff;
-      }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
     }
 
-    @ float {
-      0% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-20px);
-      }
-
-      100% {
-        transform: translateY(0);
-      }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
     }
 
-    .:nth-child(1) {
-      top: 10%;
-      left: 15%;
-    }
-
-    .:nth-child(2) {
-      top: 40%;
-      left: 80%;
-    }
-
-    .:nth-child(3) {
-      top: 70%;
-      left: 20%;
-    }
-
-    .:nth-child(4) {
-      top: 80%;
-      left: 60%;
-    }
   </style>
 </head>
-
 <body>
-  < ="text">周jc傻逼</>
+  <h1>周jc傻逼</h1>
+  <div id="floating">zjcSINKO_777</div>
+  <canvas id="matrix"></canvas>
 
-  < ="">zjcSINKO</>
-  < ="">777</>
-  < =</>
-  < =""></>
+  <script>
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = "周jc傻逼zjcSINKO_777";
+    const matrix = letters.split("");
+    const fontSize = 18;
+    const columns = canvas.width / fontSize;
+    const drops = Array.from({ length: columns }).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#ff00ff";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = matrix[Math.floor(Math.random() * matrix.length)];
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+        ctx.fillText(text, x, y);
+        if (y > canvas.height && Math.random() > 0.95) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 50);
+  </script>
 </body>
-
-</>
+</html>
