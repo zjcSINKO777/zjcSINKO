@@ -1,75 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>zjcSINKO_777</title>
   <style>
     body {
-      background-color: #141414;
-      color: white;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      height: 100vh;
       margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       overflow: hidden;
+      background-color: #000;
+      font-family: 'Arial', sans-serif;
     }
 
     h1 {
-      font-size: 80px;
-      color: #ff99cc;
-      letter-spacing: 5px;
-      text-shadow: 0 0 20px #ff99cc, 0 0 40px #ff66b2;
-      animation: glow 2s infinite alternate;
+      color: #fff;
+      font-size: 5rem;
+      text-align: center;
+      margin-top: 20vh;
+      text-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #0ff;
     }
 
-    @keyframes float {
-      0% {
-        transform: translateY(0px);
-      }
-
-      50% {
-        transform: translateY(-15px);
-      }
-
-      100% {
-        transform: translateY(0px);
-      }
-    }
-
-    .floating {
-      font-size: 20px;
-      color: #ffccff;
+    .neon {
       position: absolute;
-      animation: float 3s ease-in-out infinite;
-      pointer-events: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8rem;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #f0f, 0 0 60px #f0f;
+      animation: flicker 1.5s infinite alternate;
     }
 
-    .floating:nth-child(odd) {
-      animation-duration: 4s;
+    @keyframes flicker {
+      0% { opacity: 1; }
+      50% { opacity: 0.8; }
+      100% { opacity: 1; }
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
     }
   </style>
 </head>
-
 <body>
-  <h1>周jc傻逼</h1>
+  <h1>zjcSINKO_777</h1>
+  <div class="neon">SINKO</div>
+
+  <canvas id="matrix"></canvas>
 
   <script>
-    const words = ["zjcSINKO", "zjcSINKO", "zjcSINKO"];
-    for (let i = 0; i < 20; i++) {
-      const span = document.createElement('span');
-      span.className = 'floating';
-      span.innerText = words[Math.floor(Math.random() * words.length)];
-      span.style.left = Math.random() * 100 + 'vw';
-      span.style.top = Math.random() * 100 + 'vh';
-      span.style.animationDuration = Math.random() * 5 + 3 + 's';
-      document.body.appendChild(span);
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = '01zjcSINKO777'.split('');
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#0ff';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
     }
+
+    setInterval(draw, 50);
   </script>
 </body>
-
 </html>
